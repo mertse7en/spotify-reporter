@@ -26,7 +26,7 @@ def main() -> None:
 
     api_manager = APIManager()
 
-    if run_option == 'daily_push':
+    if run_option == 'daily_history_push':
         api_manager.get_recently_played_df()
 
     elif run_option == 'weekly_report':
