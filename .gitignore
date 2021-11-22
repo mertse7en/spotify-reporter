@@ -1,6 +1,9 @@
 #c
 config/config.env
+config/gcloudkey.json
 roadmap
+*.db
+*.json
 
 
 # Byte-compiled / optimized / DLL files
