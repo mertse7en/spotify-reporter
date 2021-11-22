@@ -29,7 +29,6 @@ def main() -> None:
         etl.daily_etl()
 
     elif run_option == 'weekly_report':
-        # Weekly report
         etl.weekly_etl()
         
 

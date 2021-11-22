@@ -1,9 +1,6 @@
 import os
-from typing import final
 import matplotlib.pyplot as plt; plt.rcdefaults()
-import numpy as np
 import matplotlib.pyplot as plt
-from spotipy import util
 
 from src.api_manager import APIManager
 from src.database_manager import DatabaseManager
@@ -26,7 +23,7 @@ class SpotifyETL():
         # Get data from spotify api
         df = self.api_manager.get_recently_played_df()
 
-        # DB
+        # DB Create table if not exist
         self.db_manager.create_table(HISTORY_TABLE_QUERY)
 
         # Load df to db

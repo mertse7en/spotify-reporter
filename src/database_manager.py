@@ -1,5 +1,3 @@
-import datetime
-import os, sys
 import pandas as pd
 import sqlite3
 import logging
@@ -14,7 +12,6 @@ class DatabaseManager:
         self.logger = logging.getLogger(self.__class__.__name__)
 
         # Configure gcp
-        from sqlalchemy import create_engine
         self.conn = sqlite3.connect("spotify.db")
         self.cursor = self.conn.cursor() 
 
