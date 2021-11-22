@@ -1,3 +1,4 @@
+import datetime
 import json
 import logging
 import os, sys
@@ -6,7 +7,7 @@ import spotipy
 
 from spotipy.oauth2 import SpotifyOAuth
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s - %(funcName)s - %(message)s")
-
+from src.util import get_date
 
 class APIManager:
     def __init__(self):
@@ -28,17 +29,15 @@ class APIManager:
 
     def get_recently_played_df(self):
         # Get the latest after time stamp
-        after = "1637360567294"
-        played_songs = self.sp.current_user_recently_played(limit=50, after="1637360567294")
+        today = datetime.datetime.now()
+        yesterday = (today - datetime.timedelta(days=1))
+        yesterday_timestamp = datetime.datetime.timestamp(yesterday)
+        played_songs = self.sp.current_user_recently_played(limit=50, after=int(yesterday_timestamp))
         
-        # Write json to check json element on "https://jsonformatter.curiousconcept.com/"
-        # with open('example.json', 'w') as f:
-        #     json.dump(played_songs, f)
 
-        items = played_songs["items"] # List
+        items = played_songs["items"] 
         after_cursor = played_songs["cursors"] # Push after_cursor timestamp to db in order to find correct time interval in next commit 
         # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-        print("-"*100)
 
         song_name = list() 
         song_id = list() 
@@ -98,7 +97,8 @@ class APIManager:
             "artist_id": artist_id,
             "artist_spotify_url": artist_spotify_url
         })
-
+        today = get_date(days=0)
+        df["date"] = today
         return df
 
 
