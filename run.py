@@ -1,7 +1,7 @@
 import argparse
 import os
 from dotenv import load_dotenv
-from src.api_manager import APIManager
+from src.spotify_etl import SpotifyETL
 
 
 def load_environment() -> None:
@@ -22,21 +22,17 @@ def load_arg():
 
 def main() -> None:
     load_environment()
-    run_option = load_arg
-
-    api_manager = APIManager()
+    run_option = load_arg()
+    etl = SpotifyETL()
 
     if run_option == 'daily_history_push':
-        api_manager.get_recently_played_df()
+        etl.daily_etl()
 
     elif run_option == 'weekly_report':
         # Weekly report
-        pass    
-
-
-
-
-
+        etl.weekly_etl()
+        
 
 if __name__ == "__main__":
     main()
+
