@@ -1,7 +1,7 @@
 import datetime
 
 HISTORY_TABLE_QUERY = """
-        CREATE TABLE IF NOT EXISTS spotify_listen_history(
+        CREATE TABLE IF NOT EXISTS listen_history(
             song_name TEXT,
             artist_name TEXT ,
             song_id INTEGER,
