@@ -30,7 +30,7 @@ class SpotifyETL():
         self.db_manager.create_table(HISTORY_TABLE_QUERY)
 
         # Load df to db
-        self.db_manager.df_to_sqlite(df=df, table_name='spotify_listen_history')
+        self.db_manager.df_to_sqlite(df=df, table_name='listen_history')
 
 
     def weekly_etl(self):
@@ -53,7 +53,7 @@ class SpotifyETL():
     def __get_most_listened_song(self):
         query = """
                 SELECT song_name, artist_name, count(song_name) as count_song
-                FROM spotify_listen_history 
+                FROM listen_history 
                 WHERE date BETWEEN '{}' AND '{}' 
                 GROUP BY song_name 
                 ORDER BY count(song_name) DESC
