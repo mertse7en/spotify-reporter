@@ -14,8 +14,11 @@ class SpotifyETL():
         self.db_manager = DatabaseManager()
         self.mail_manager = MailManager()
 
+        self.fig = None
+
     def __del__(self):
-        os.remove(self.fig)
+        if self.fig is not None:
+            os.remove(self.fig)
 
 
     def daily_etl(self):

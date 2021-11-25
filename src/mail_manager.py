@@ -5,19 +5,25 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email.mime.image import MIMEImage
+import logging
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s - %(funcName)s - %(message)s")
 
 
 class MailManager:
     def __init__(self):
+        self.logger = logging.getLogger(self.__class__.__name__)
+
         self.sender = os.environ["SENDER_MAIL"]
         self.password = os.environ["MAIL_PASSWORD"]
         self.server = 'smtp.gmail.com'
         self.port = 587
+
         connection = smtplib.SMTP(self.server, self.port)        
         connection.ehlo()
         connection.starttls()
         connection.ehlo
         connection.login(self.sender, self.password)
+
         self.connection = connection
 
     def send_mail(self, subject, receiver, html='template', img_path=None, additional=None):
@@ -50,5 +56,7 @@ class MailManager:
             msgRoot.attach(msgImage)
         
         self.connection.sendmail(self.sender, receiver, msgRoot.as_string())
+        self.logger.info("Message has been sended to {}".format(receiver))
+
 
         

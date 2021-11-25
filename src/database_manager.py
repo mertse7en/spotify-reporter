@@ -1,10 +1,7 @@
 import pandas as pd
 import sqlite3
 import logging
-
-
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s - %(funcName)s - %(message)s")
-
 
 
 class DatabaseManager:
