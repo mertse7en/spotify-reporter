@@ -23,8 +23,8 @@ def load_arg():
 def main() -> None:
     load_environment()
     run_option = load_arg()
-    etl = SpotifyETL()
 
+    etl = SpotifyETL()
     if run_option == 'daily_history_push':
         etl.daily_etl()
 
