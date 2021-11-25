@@ -8,7 +8,7 @@ def load_environment() -> None:
     if os.path.exists("config/config.env"):
         load_dotenv(dotenv_path="config/config.env")
     else:
-        raise FileNotFoundError("\"config/config.env\" not found")
+        raise FileNotFoundError("\"config/config.env\" not found. Please set your credentials as shown in config.env.example")
 
 
 def load_arg():
