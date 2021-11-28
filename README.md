@@ -29,5 +29,7 @@ python run.py --option weekly_report
 ```
 
 ## Schedule @Crontab
+```
 0 10 * * *  $PATH_TO_PROJECT_FOLDER/venv/bin/activate && $PATH_TO_PROJECT_FOLDER/run.py daily_history_push   -- # Everyday “At 10:00.”
 0 11 * * 1  $PATH_TO_PROJECT_FOLDER/venv/bin/activate && $PATH_TO_PROJECT_FOLDER/run.py weekly_report        -- # Everyweek “At 11:00.”
+```
